@@ -1,0 +1,1152 @@
+#VRML_OBJ R2021b utf8
+Robot {
+  translation 0 0.045 0
+  children [
+    DEF GROUP_RB Group {
+      children [
+        DEF WHEELS_GR Group {
+          children [
+            DEF WHEEL_1 Transform {
+              translation -0.115 0 -0.139
+              rotation 0 1 0 0.6999996938995747
+              children [
+                HingeJoint {
+                  jointParameters HingeJointParameters {
+                    axis 0 0 1
+                  }
+                  device [
+                    RotationalMotor {
+                      name "wheel motor 1"
+                      maxVelocity 100
+                    }
+                    PositionSensor {
+                      name "position_sensor1"
+                      resolution 0.003848528
+                    }
+                  ]
+                  endPoint Solid {
+                    translation -2.1022674952721998e-05 -0.00010036692727752998 -4.741542575070755e-06
+                    rotation -0.002111498507350433 -0.0006260111646812155 0.9999975748390968 5.89562779274172
+                    children [
+                      DEF WHEELS_TR1 Transform {
+                        rotation 1 0 0 1.57
+                        children [
+                          DEF WHEELS_SH Shape {
+                            appearance DEF COLOR_WHEEL PBRAppearance {
+                              baseColor 0 0 0
+                              roughness 1
+                              metalness 0
+                            }
+                            geometry DEF SIZE_WHEEL Cylinder {
+                              height 0.02
+                              radius 0.04
+                            }
+                          }
+                        ]
+                      }
+                      DEF SW1_1 HingeJoint {
+                        jointParameters HingeJointParameters {
+                          anchor 0 0.04 0
+                        }
+                        endPoint Solid {
+                          translation 0 0.04 0
+                          rotation -7.668291855326794e-09 7.662187818830546e-09 1 1.57
+                          children [
+                            DEF SMALL_WHEEL_TR1 Transform {
+                              children [
+                                DEF SMALL_WHEEL_SH Shape {
+                                  appearance PBRAppearance {
+                                    roughness 1
+                                    metalness 0
+                                  }
+                                  geometry Cylinder {
+                                    height 0.02
+                                    radius 0.005
+                                  }
+                                }
+                              ]
+                            }
+                          ]
+                          boundingObject USE SMALL_WHEEL_TR1
+                          physics Physics {
+                            mass 0.1
+                          }
+                        }
+                      }
+                      DEF SW1_2 HingeJoint {
+                        jointParameters HingeJointParameters {
+                          axis 1 -1 0
+                          anchor 0.02828 0.02828 0
+                        }
+                        endPoint Solid {
+                          translation 0.02828 0.02828 0
+                          rotation -3.2600691324941116e-09 7.869410632697284e-09 1 0.7852999999999993
+                          children [
+                            USE SMALL_WHEEL_SH
+                          ]
+                          name "solid(1)"
+                          boundingObject USE SMALL_WHEEL_SH
+                          physics Physics {
+                            mass 0.1
+                          }
+                        }
+                      }
+                      DEF SW1_3 HingeJoint {
+                        jointParameters HingeJointParameters {
+                          axis 1 1 0
+                          anchor -0.02828 0.02828 0
+                        }
+                        endPoint Solid {
+                          translation -0.02828 0.02828 0
+                          rotation -7.573329097531246e-09 -1.8281095910715826e-08 -0.9999999999999999 0.7852999999999999
+                          children [
+                            Transform {
+                              children [
+                                USE SMALL_WHEEL_SH
+                              ]
+                            }
+                          ]
+                          name "solid(2)"
+                          boundingObject USE SMALL_WHEEL_SH
+                          physics Physics {
+                            mass 0.1
+                          }
+                        }
+                      }
+                      DEF SW1_4 HingeJoint {
+                        jointParameters HingeJointParameters {
+                          axis 0 1 0
+                          anchor -0.04 0 0
+                        }
+                        endPoint Solid {
+                          translation -0.04 0 0
+                          children [
+                            Transform {
+                              children [
+                                USE SMALL_WHEEL_SH
+                              ]
+                            }
+                          ]
+                          name "solid(3)"
+                          boundingObject USE SMALL_WHEEL_SH
+                          physics Physics {
+                            mass 0.1
+                          }
+                        }
+                      }
+                      DEF SW1_5 HingeJoint {
+                        jointParameters HingeJointParameters {
+                          axis 0 1 0
+                          anchor 0.04 0 0
+                        }
+                        endPoint Solid {
+                          translation 0.04 0 0
+                          children [
+                            Transform {
+                              children [
+                                USE SMALL_WHEEL_SH
+                              ]
+                            }
+                          ]
+                          name "solid(4)"
+                          boundingObject USE SMALL_WHEEL_SH
+                          physics Physics {
+                            mass 0.1
+                          }
+                        }
+                      }
+                      DEF SW1_6 HingeJoint {
+                        jointParameters HingeJointParameters {
+                          axis 1 -1 0
+                          anchor -0.02828 -0.02828 0
+                        }
+                        endPoint Solid {
+                          translation -0.02828 -0.02828 0
+                          rotation -3.2600691307940147e-09 7.869410627596998e-09 1 0.7852999999999993
+                          children [
+                            Transform {
+                              children [
+                                USE SMALL_WHEEL_SH
+                              ]
+                            }
+                          ]
+                          name "solid(5)"
+                          boundingObject USE SMALL_WHEEL_SH
+                          physics Physics {
+                            mass 0.1
+                          }
+                        }
+                      }
+                      DEF SW1_7 HingeJoint {
+                        jointParameters HingeJointParameters {
+                          axis 1 1 0
+                          anchor 0.02828 -0.02828 0
+                        }
+                        endPoint Solid {
+                          translation 0.02828 -0.02828 0
+                          rotation 6.481264209936117e-10 1.564498398522571e-09 -1 0.7852999999999993
+                          children [
+                            Transform {
+                              children [
+                                USE SMALL_WHEEL_SH
+                              ]
+                            }
+                          ]
+                          name "solid(6)"
+                          boundingObject USE SMALL_WHEEL_SH
+                          physics Physics {
+                            mass 0.1
+                          }
+                        }
+                      }
+                      DEF SW1_8 HingeJoint {
+                        jointParameters HingeJointParameters {
+                          anchor 0 -0.04 0
+                        }
+                        endPoint Solid {
+                          translation 0 -0.04 0
+                          rotation 6.528297504972577e-10 -6.523100919500852e-10 1 1.5699999999999996
+                          children [
+                            Transform {
+                              children [
+                                USE SMALL_WHEEL_SH
+                              ]
+                            }
+                          ]
+                          name "solid(7)"
+                          boundingObject USE SMALL_WHEEL_SH
+                          physics Physics {
+                            mass 0.1
+                          }
+                        }
+                      }
+                    ]
+                    name "solid(2)"
+                    boundingObject USE WHEELS_TR1
+                    physics Physics {
+                      mass 0.1
+                    }
+                  }
+                }
+              ]
+            }
+            DEF WHEEL_2 Transform {
+              translation -0.115 0 0.139
+              rotation 0 1 0 -0.7
+              children [
+                HingeJoint {
+                  jointParameters HingeJointParameters {
+                    axis 0 0 1
+                  }
+                  device [
+                    RotationalMotor {
+                      name "wheel motor 2"
+                      maxVelocity 100
+                    }
+                    PositionSensor {
+                      name "position_sensor2"
+                      resolution 0.003848528
+                    }
+                  ]
+                  endPoint Solid {
+                    translation 7.487471054116345e-05 -2.6036251455752006e-06 8.505712828676959e-06
+                    rotation 0.0037795445435382428 -0.0036290150932091194 0.999986272552027 6.0746054881999845
+                    children [
+                      DEF WHEEL_TR2 Transform {
+                        rotation 1 0 0 1.57
+                        children [
+                          USE WHEELS_SH
+                        ]
+                      }
+                      DEF SW2_1 HingeJoint {
+                        jointParameters HingeJointParameters {
+                          anchor 0 0.04 0
+                        }
+                        endPoint Solid {
+                          translation 0 0.04 0
+                          rotation 1.2368583269736622e-08 -1.2358737754161316e-08 0.9999999999999999 1.5700000000000003
+                          children [
+                            DEF SMALL_WHEEL_TR2 Transform {
+                              children [
+                                USE SMALL_WHEEL_SH
+                              ]
+                            }
+                          ]
+                          boundingObject USE SMALL_WHEEL_TR2
+                          physics Physics {
+                            mass 0.1
+                          }
+                        }
+                      }
+                      DEF SW2_2 HingeJoint {
+                        jointParameters HingeJointParameters {
+                          axis 1 -1 0
+                          anchor 0.02828 0.02828 0
+                        }
+                        endPoint Solid {
+                          translation 0.02828 0.02828 0
+                          rotation -7.9502400863442e-10 1.919091320106386e-09 1 0.7852999999999999
+                          children [
+                            Transform {
+                              children [
+                                USE SMALL_WHEEL_SH
+                              ]
+                            }
+                          ]
+                          name "solid(1)"
+                          boundingObject USE SMALL_WHEEL_SH
+                          physics Physics {
+                          }
+                        }
+                      }
+                      DEF SW2_3 HingeJoint {
+                        jointParameters HingeJointParameters {
+                          axis 1 1 0
+                          anchor -0.02828 0.02828 0
+                        }
+                        endPoint Solid {
+                          translation -0.02828 0.02828 0
+                          rotation -5.927844744342019e-09 -1.4309096692688473e-08 -0.9999999999999999 0.7852999999999999
+                          children [
+                            Transform {
+                              children [
+                                USE SMALL_WHEEL_SH
+                              ]
+                            }
+                          ]
+                          name "solid(2)"
+                          boundingObject USE SMALL_WHEEL_SH
+                          physics Physics {
+                            mass 0.1
+                          }
+                        }
+                      }
+                      DEF SW2_4 HingeJoint {
+                        jointParameters HingeJointParameters {
+                          axis 0 1 0
+                          anchor -0.04 0 0
+                        }
+                        endPoint Solid {
+                          translation -0.04 0 0
+                          children [
+                            Transform {
+                              children [
+                                USE SMALL_WHEEL_SH
+                              ]
+                            }
+                          ]
+                          name "solid(3)"
+                          boundingObject USE SMALL_WHEEL_SH
+                          physics Physics {
+                            mass 0.1
+                          }
+                        }
+                      }
+                      DEF SW2_5 HingeJoint {
+                        jointParameters HingeJointParameters {
+                          axis 0 1 0
+                          anchor 0.04 0 0
+                        }
+                        endPoint Solid {
+                          translation 0.04 0 0
+                          rotation 0 1 0 1.5700000000006267
+                          children [
+                            Transform {
+                              children [
+                                USE SMALL_WHEEL_SH
+                              ]
+                            }
+                          ]
+                          name "solid(4)"
+                          boundingObject USE SMALL_WHEEL_SH
+                          physics Physics {
+                            mass 0.1
+                          }
+                        }
+                      }
+                      DEF SW2_6 HingeJoint {
+                        jointParameters HingeJointParameters {
+                          axis 1 -1 0
+                          anchor -0.02828 -0.02828 0
+                        }
+                        endPoint Solid {
+                          translation -0.02828 -0.02828 0
+                          rotation -7.950240096261425e-10 1.9190913230815533e-09 1 0.7852999999999999
+                          children [
+                            Transform {
+                              children [
+                                USE SMALL_WHEEL_SH
+                              ]
+                            }
+                          ]
+                          name "solid(5)"
+                          boundingObject USE SMALL_WHEEL_SH
+                          physics Physics {
+                            mass 0.1
+                          }
+                        }
+                      }
+                      DEF SW2_7 HingeJoint {
+                        jointParameters HingeJointParameters {
+                          axis 1 1 0
+                          anchor 0.02828 -0.02828 0
+                        }
+                        endPoint Solid {
+                          translation 0.02828 -0.02828 0
+                          rotation -5.927845279517925e-09 -1.4309097983486007e-08 -0.9999999999999999 0.7852999999999999
+                          children [
+                            Transform {
+                              children [
+                                USE SMALL_WHEEL_SH
+                              ]
+                            }
+                          ]
+                          name "solid(6)"
+                          boundingObject USE SMALL_WHEEL_SH
+                          physics Physics {
+                            mass 0.1
+                          }
+                        }
+                      }
+                      DEF SW2_8 HingeJoint {
+                        jointParameters HingeJointParameters {
+                          anchor 0 -0.04 0
+                        }
+                        endPoint Solid {
+                          translation 0 -0.04 0
+                          rotation -3.067808565591789e-19 -1.5339042827958946e-19 1 1.5699999999999996
+                          children [
+                            Transform {
+                              children [
+                                USE SMALL_WHEEL_SH
+                              ]
+                            }
+                          ]
+                          name "solid(7)"
+                          boundingObject USE SMALL_WHEEL_SH
+                          physics Physics {
+                            mass 0.1
+                          }
+                        }
+                      }
+                    ]
+                    name "solid(2)"
+                    boundingObject USE WHEEL_TR2
+                    physics Physics {
+                      mass 0.1
+                    }
+                  }
+                }
+              ]
+            }
+            DEF WHEEL_3 Transform {
+              translation 0.18 0 0
+              rotation 0 1 0 1.57
+              children [
+                HingeJoint {
+                  jointParameters HingeJointParameters {
+                    axis 0 0 1
+                  }
+                  device [
+                    RotationalMotor {
+                      name "wheel motor 3"
+                      maxVelocity 100
+                    }
+                    PositionSensor {
+                      name "position_sensor3"
+                      resolution 0.003848528
+                    }
+                  ]
+                  endPoint Solid {
+                    translation -5.0801073314498465e-05 0.0004330319098755055 1.1703817644814757e-05
+                    rotation -2.3587923327308e-07 6.0919674981635645e-06 -0.9999999999814161 0.18654317754719943
+                    children [
+                      DEF WHEEL_TR3 Transform {
+                        rotation 1 0 0 1.57
+                        children [
+                          USE WHEELS_SH
+                        ]
+                      }
+                      DEF SW3_1 HingeJoint {
+                        jointParameters HingeJointParameters {
+                          anchor 0 0.04 0
+                        }
+                        endPoint Solid {
+                          translation 0 0.04 0
+                          rotation -4.113905292303052e-09 4.110630582137932e-09 1 1.57
+                          children [
+                            Transform {
+                              children [
+                                USE SMALL_WHEEL_SH
+                              ]
+                            }
+                          ]
+                          boundingObject USE SMALL_WHEEL_SH
+                          physics Physics {
+                            mass 0.1
+                          }
+                        }
+                      }
+                      DEF SW3_2 HingeJoint {
+                        jointParameters HingeJointParameters {
+                          axis 1 -1 0
+                          anchor 0.02828 0.02828 0
+                        }
+                        endPoint Solid {
+                          translation 0.02828 0.02828 0
+                          rotation -2.356687253174169e-09 5.688756573911921e-09 1 0.7852999999999999
+                          children [
+                            Transform {
+                              children [
+                                USE SMALL_WHEEL_SH
+                              ]
+                            }
+                          ]
+                          name "solid(1)"
+                          boundingObject USE SMALL_WHEEL_SH
+                          physics Physics {
+                            mass 0.1
+                          }
+                        }
+                      }
+                      DEF SW3_3 HingeJoint {
+                        jointParameters HingeJointParameters {
+                          axis 1 1 0
+                          anchor -0.02828 0.02828 0
+                        }
+                        endPoint Solid {
+                          translation -0.02828 0.02828 0
+                          rotation -3.4573369230835865e-09 -8.345591095113635e-09 -1 0.7852999999999993
+                          children [
+                            Transform {
+                              children [
+                                USE SMALL_WHEEL_SH
+                              ]
+                            }
+                          ]
+                          name "solid(2)"
+                          boundingObject USE SMALL_WHEEL_SH
+                          physics Physics {
+                            mass 0.1
+                          }
+                        }
+                      }
+                      DEF SW3_4 HingeJoint {
+                        jointParameters HingeJointParameters {
+                          axis 0 1 0
+                          anchor -0.04 0 0
+                        }
+                        endPoint Solid {
+                          translation -0.04 0 0
+                          children [
+                            Transform {
+                              children [
+                                USE SMALL_WHEEL_SH
+                              ]
+                            }
+                          ]
+                          name "solid(3)"
+                          boundingObject USE SMALL_WHEEL_SH
+                          physics Physics {
+                            mass 0.1
+                          }
+                        }
+                      }
+                      DEF SW3_5 HingeJoint {
+                        jointParameters HingeJointParameters {
+                          axis 0 1 0
+                          anchor 0.04 0 0
+                        }
+                        endPoint Solid {
+                          translation 0.04 0 0
+                          rotation 0 1 0 1.569999998443481
+                          children [
+                            Transform {
+                              children [
+                                USE SMALL_WHEEL_SH
+                              ]
+                            }
+                          ]
+                          name "solid(4)"
+                          boundingObject USE SMALL_WHEEL_SH
+                          physics Physics {
+                            mass 0.1
+                          }
+                        }
+                      }
+                      DEF SW3_6 HingeJoint {
+                        jointParameters HingeJointParameters {
+                          axis 1 -1 0
+                          anchor -0.02828 -0.02828 0
+                        }
+                        endPoint Solid {
+                          translation -0.02828 -0.02828 0
+                          rotation -2.3566872506240275e-09 5.688756575045323e-09 1 0.7852999999999993
+                          children [
+                            Transform {
+                              children [
+                                USE SMALL_WHEEL_SH
+                              ]
+                            }
+                          ]
+                          name "solid(5)"
+                          boundingObject USE SMALL_WHEEL_SH
+                          physics Physics {
+                            mass 0.1
+                          }
+                        }
+                      }
+                      DEF SW3_7 HingeJoint {
+                        jointParameters HingeJointParameters {
+                          axis 1 1 0
+                          anchor 0.02828 -0.02828 0
+                        }
+                        endPoint Solid {
+                          translation 0.02828 -0.02828 0
+                          rotation -3.4573369213834926e-09 -8.345591094263591e-09 -1 0.7852999999999999
+                          children [
+                            Transform {
+                              children [
+                                USE SMALL_WHEEL_SH
+                              ]
+                            }
+                          ]
+                          name "solid(6)"
+                          boundingObject USE SMALL_WHEEL_SH
+                          physics Physics {
+                            mass 0.1
+                          }
+                        }
+                      }
+                      DEF SW3_8 HingeJoint {
+                        jointParameters HingeJointParameters {
+                          anchor 0 -0.04 0
+                        }
+                        endPoint Solid {
+                          translation 0 -0.04 0
+                          rotation 0 0 1 1.57
+                          children [
+                            Transform {
+                              children [
+                                USE SMALL_WHEEL_SH
+                              ]
+                            }
+                          ]
+                          name "solid(7)"
+                          boundingObject USE SMALL_WHEEL_SH
+                          physics Physics {
+                            mass 0.1
+                          }
+                        }
+                      }
+                    ]
+                    name "solid(3)"
+                    boundingObject USE WHEEL_TR3
+                    physics Physics {
+                      mass 0.1
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        }
+        DEF BASE_GR Group {
+          children [
+            DEF BOTTOM_BASE Transform {
+              translation 0 0.015 0
+              children [
+                HingeJoint {
+                  jointParameters HingeJointParameters {
+                    axis 0 1 0
+                  }
+                  endPoint Solid {
+                    translation -5.596120594664081e-18 0.14999999999999994 0
+                    children [
+                      Shape {
+                        appearance DEF BASE_COLOR PBRAppearance {
+                          baseColor 0.180392 0.203922 0.211765
+                          roughness 1
+                          metalness 0
+                        }
+                        geometry DEF BOTTOM_BASE_GM Cylinder {
+                          height 0.3
+                          radius 0.17
+                        }
+                      }
+                      DEF BASE_TOP Transform {
+                        translation 0 0.175 0
+                        children [
+                          DEF solid Solid {
+                            children [
+                              Shape {
+                                appearance USE BASE_COLOR
+                                geometry DEF TOP_BASE Cylinder {
+                                  height 0.05
+                                  radius 0.1
+                                }
+                              }
+                            ]
+                            boundingObject USE TOP_BASE
+                          }
+                        ]
+                      }
+                    ]
+                    name "solid(3)"
+                    boundingObject USE BOTTOM_BASE_GM
+                    physics Physics {
+                      mass 40
+                    }
+                  }
+                }
+              ]
+            }
+            Transform {
+              translation 0.55 0.715 0.05
+              children [
+                Shape {
+                  geometry Cylinder {
+                    height 0.1
+                    radius 0.05
+                  }
+                }
+              ]
+            }
+          ]
+        }
+        DEF LINKS_GR Group {
+          children [
+            DEF LINK_1 Transform {
+              translation 0 0.525 0
+              children [
+                HingeJoint {
+                  jointParameters HingeJointParameters {
+                    axis 0 1 0
+                  }
+                  device [
+                    RotationalMotor {
+                      name "rotational motor link 1"
+                      maxTorque 100
+                    }
+                    PositionSensor {
+                      name "position sensor link 1"
+                    }
+                  ]
+                  endPoint Solid {
+                    translation 0 0.016 0
+                    rotation 9.024995591670962e-17 -1.938860675407077e-06 0.9999999999981204 4.692612018869162e-06
+                    children [
+                      Shape {
+                        appearance DEF LINKS_COLOR PBRAppearance {
+                          baseColor 0 0 0
+                          roughness 1
+                          metalness 0
+                        }
+                        geometry DEF LINK_1_GM Cylinder {
+                          height 0.35
+                          radius 0.05
+                        }
+                      }
+                      DEF LINK_2 Transform {
+                        translation 0 0.175 0
+                        children [
+                          HingeJoint {
+                            jointParameters HingeJointParameters {
+                              axis 0 0 1
+                            }
+                            device [
+                              RotationalMotor {
+                                name "rotational motor link 2"
+                                controlPID 50 5 0
+                                maxTorque 300
+                              }
+                              PositionSensor {
+                                name "position sensor link 2"
+                              }
+                            ]
+                            endPoint Solid {
+                              translation 3.995787345698745e-06 -1.10684311842288e-07 0.07500040380508344
+                              rotation 2.0650122476036132e-05 0.0005898122413366526 -0.9999998258475311 0.0006158779306517842
+                              children [
+                                Shape {
+                                  appearance USE LINKS_COLOR
+                                  geometry DEF LINK_2_GM Box {
+                                    size 0.05 0.05 0.15
+                                  }
+                                }
+                                DEF LINK_3 Transform {
+                                  translation 0 0 0.075
+                                  children [
+                                    Solid {
+                                      translation 0.15070900000000004 0 0
+                                      rotation 0.003753299385670586 -0.9999831433038613 -0.004430107431061613 0.000433209885579818
+                                      children [
+                                        Shape {
+                                          appearance USE LINKS_COLOR
+                                          geometry DEF LINK_3_GM Box {
+                                            size 0.3 0.1 0.05
+                                          }
+                                        }
+                                        DEF LINK_4 Transform {
+                                          translation 0.15 0 0
+                                          children [
+                                            HingeJoint {
+                                              jointParameters HingeJointParameters {
+                                                axis 0 0 1
+                                              }
+                                              device [
+                                                PositionSensor {
+                                                  name "position sensor link 3"
+                                                }
+                                                RotationalMotor {
+                                                  name "rotational motor link 3"
+                                                  maxTorque 50
+                                                }
+                                              ]
+                                              endPoint Solid {
+                                                translation 0.125 0 -0.05
+                                                rotation 0 0 1 0
+                                                children [
+                                                  Shape {
+                                                    appearance USE LINKS_COLOR
+                                                    geometry DEF LINK_4_GM Box {
+                                                      size 0.25 0.075 0.05
+                                                    }
+                                                  }
+                                                  DEF LINK_5 Transform {
+                                                    translation 0.125 0 0
+                                                    children [
+                                                      HingeJoint {
+                                                        jointParameters HingeJointParameters {
+                                                          axis 0 0 1
+                                                        }
+                                                        device [
+                                                          RotationalMotor {
+                                                            name "rotational motor link 4"
+                                                          }
+                                                          PositionSensor {
+                                                            name "position sensor link 4"
+                                                          }
+                                                        ]
+                                                        endPoint Solid {
+                                                          translation 0.050000000000000044 1.734723475976807e-18 -0.05
+                                                          rotation 0 0 1 0
+                                                          children [
+                                                            Shape {
+                                                              appearance USE LINKS_COLOR
+                                                              geometry DEF LINK_5_GM Box {
+                                                                size 0.1 0.05 0.05
+                                                              }
+                                                            }
+                                                            DEF JOINT5_TRANS Transform {
+                                                              translation 0.075 0 0
+                                                              rotation 1 0 0 -1.571
+                                                              children [
+                                                                Shape {
+                                                                  appearance DEF DARK_JOIN PBRAppearance {
+                                                                    baseColor 0.533333 0.541176 0.521569
+                                                                    roughness 0.4
+                                                                    metalness 0
+                                                                  }
+                                                                  geometry Cylinder {
+                                                                    height 0.05
+                                                                    radius 0.025
+                                                                  }
+                                                                }
+                                                              ]
+                                                            }
+                                                            Solid {
+                                                              translation 0.028 0 0
+                                                              rotation 0 0 1 -1.57
+                                                              scale 0.647074 0.647074 0.647074
+                                                              children [
+                                                                Group {
+                                                                }
+                                                                DEF WRIST_GROUP Group {
+                                                                  children [
+                                                                    Transform {
+                                                                      translation 0 0.136 0
+                                                                      children [
+                                                                        Shape {
+                                                                          appearance DEF DARK PBRAppearance {
+                                                                            baseColor 0.301961 0.301961 0.301961
+                                                                            roughness 0.3
+                                                                            metalness 0
+                                                                          }
+                                                                          geometry Cylinder {
+                                                                            height 0.05
+                                                                            radius 0.019
+                                                                          }
+                                                                        }
+                                                                      ]
+                                                                    }
+                                                                    Transform {
+                                                                      translation 0 0.1845 0
+                                                                      children [
+                                                                        Shape {
+                                                                          appearance USE DARK
+                                                                          geometry Cylinder {
+                                                                            height 0.047
+                                                                            radius 0.026
+                                                                          }
+                                                                        }
+                                                                      ]
+                                                                    }
+                                                                    Transform {
+                                                                      translation 0 0.222 0
+                                                                      children [
+                                                                        Shape {
+                                                                          appearance DEF WHITE PBRAppearance {
+                                                                            roughness 0.4
+                                                                            metalness 0
+                                                                          }
+                                                                          geometry Cylinder {
+                                                                            height 0.03
+                                                                            radius 0.015
+                                                                          }
+                                                                        }
+                                                                      ]
+                                                                    }
+                                                                  ]
+                                                                }
+                                                                DEF GripperR SliderJoint {
+                                                                  jointParameters JointParameters {
+                                                                    axis -1 0 0
+                                                                  }
+                                                                  device [
+                                                                    LinearMotor {
+                                                                      name "joint_GripperR"
+                                                                      minPosition -0.004
+                                                                      maxPosition 0.01
+                                                                    }
+                                                                  ]
+                                                                  endPoint Solid {
+                                                                    translation -0.007 0.23 0
+                                                                    rotation 0 1 0 -1.5708
+                                                                    children [
+                                                                      Transform {
+                                                                        rotation 0 1 0 1.5708
+                                                                        children [
+                                                                          Shape {
+                                                                            appearance USE DARK_JOIN
+                                                                            geometry DEF GripperR_FACES IndexedFaceSet {
+                                                                              coord DEF GripperR_COORD Coordinate {
+                                                                                point [
+                                                                                  -0.003226 0 0.01065
+                                                                                  0.003226 0 0.01065
+                                                                                  -0.003226 0 -0.01065
+                                                                                  0.003226 0 -0.01065
+                                                                                  -0.003226 0.03851 0.01065
+                                                                                  0.003226 0.03851 0.01065
+                                                                                  -0.003226 0.03851 -0.01065
+                                                                                  0.003226 0.03851 -0.01065
+                                                                                  -0.009777 0 0.06255
+                                                                                  -0.003224 0 0.06255
+                                                                                  -0.009777 0 -0.06255
+                                                                                  -0.003224 0 -0.06255
+                                                                                  -0.009777 0.03851 0.06255
+                                                                                  -0.003224 0.03851 0.06255
+                                                                                  -0.009777 0.03851 -0.06255
+                                                                                  -0.003224 0.03851 -0.06255
+                                                                                ]
+                                                                              }
+                                                                              texCoord DEF GripperR_TEXCOORD TextureCoordinate {
+                                                                                point [
+                                                                                  0 0
+                                                                                  1 0
+                                                                                  0 1
+                                                                                  1 1
+                                                                                  0 0
+                                                                                  1 0
+                                                                                  0 1
+                                                                                  1 1
+                                                                                  0 0
+                                                                                  1 0
+                                                                                  0 1
+                                                                                  1 1
+                                                                                  0 0
+                                                                                  1 0
+                                                                                  0 1
+                                                                                  1 1
+                                                                                  0 0
+                                                                                  1 0
+                                                                                  0 1
+                                                                                  1 1
+                                                                                  0 0
+                                                                                  1 0
+                                                                                  0 1
+                                                                                  1 1
+                                                                                ]
+                                                                              }
+                                                                              coordIndex [
+                                                                                0, 2, 3, -1, 3, 1, 0, -1, 4, 5, 7, -1, 7, 6, 4, -1, 0, 1, 5, -1, 5, 4, 0, -1, 1, 3, 7, -1, 7, 5, 1, -1, 3, 2, 6, -1, 6, 7, 3, -1, 2, 0, 4, -1, 4, 6, 2, -1
+                                                                              ]
+                                                                            }
+                                                                          }
+                                                                          Shape {
+                                                                            appearance DEF CREAM PBRAppearance {
+                                                                              baseColor 0.8314 0.8078 0.7451
+                                                                              roughness 0.4
+                                                                              metalness 0
+                                                                            }
+                                                                          }
+                                                                        ]
+                                                                      }
+                                                                    ]
+                                                                    name "GripperR"
+                                                                    boundingObject DEF GRIP_BO Transform {
+                                                                      translation 0 0.023 0
+                                                                      children [
+                                                                        Box {
+                                                                          size 0.021 0.031 0.006
+                                                                        }
+                                                                      ]
+                                                                    }
+                                                                    physics Physics {
+                                                                    }
+                                                                  }
+                                                                }
+                                                                DEF GripperL SliderJoint {
+                                                                  jointParameters JointParameters {
+                                                                    axis 1 0 0
+                                                                  }
+                                                                  device [
+                                                                    LinearMotor {
+                                                                      name "joint_GripperL"
+                                                                      minPosition -0.004
+                                                                      maxPosition 0.01
+                                                                    }
+                                                                  ]
+                                                                  endPoint Solid {
+                                                                    translation 0.007 0.23 0
+                                                                    rotation 0 1 0 1.5708
+                                                                    children [
+                                                                      DEF GripperL Transform {
+                                                                        rotation 0 1 0 -1.5708
+                                                                        children [
+                                                                          Shape {
+                                                                            appearance USE DARK_JOIN
+                                                                            geometry DEF GripperL_FACES IndexedFaceSet {
+                                                                              coord DEF GripperL_COORD Coordinate {
+                                                                                point [
+                                                                                  -0.003226 0 0.01065
+                                                                                  0.003226 0 0.01065
+                                                                                  -0.003226 0 -0.01065
+                                                                                  0.003226 0 -0.01065
+                                                                                  -0.003226 0.03851 0.01065
+                                                                                  0.003226 0.03851 0.01065
+                                                                                  -0.003226 0.03851 -0.01065
+                                                                                  0.003226 0.03851 -0.01065
+                                                                                  0.003224 0 0.06255
+                                                                                  0.009777 0 0.06255
+                                                                                  0.003224 0 -0.06255
+                                                                                  0.009777 0 -0.06255
+                                                                                  0.003224 0.03851 0.06255
+                                                                                  0.009777 0.03851 0.06255
+                                                                                  0.003224 0.03851 -0.06255
+                                                                                  0.009777 0.03851 -0.06255
+                                                                                ]
+                                                                              }
+                                                                              texCoord DEF GripperL_TEXCOORD TextureCoordinate {
+                                                                                point [
+                                                                                  0 0
+                                                                                  1 0
+                                                                                  0 1
+                                                                                  1 1
+                                                                                  0 0
+                                                                                  1 0
+                                                                                  0 1
+                                                                                  1 1
+                                                                                  0 0
+                                                                                  1 0
+                                                                                  0 1
+                                                                                  1 1
+                                                                                  0 0
+                                                                                  1 0
+                                                                                  0 1
+                                                                                  1 1
+                                                                                  0 0
+                                                                                  1 0
+                                                                                  0 1
+                                                                                  1 1
+                                                                                  0 0
+                                                                                  1 0
+                                                                                  0 1
+                                                                                  1 1
+                                                                                ]
+                                                                              }
+                                                                              coordIndex [
+                                                                                0, 2, 3, -1, 3, 1, 0, -1, 4, 5, 7, -1, 7, 6, 4, -1, 0, 1, 5, -1, 5, 4, 0, -1, 1, 3, 7, -1, 7, 5, 1, -1, 3, 2, 6, -1, 6, 7, 3, -1, 2, 0, 4, -1, 4, 6, 2, -1
+                                                                              ]
+                                                                            }
+                                                                          }
+                                                                          Shape {
+                                                                            appearance USE CREAM
+                                                                          }
+                                                                        ]
+                                                                      }
+                                                                    ]
+                                                                    name "GripperL"
+                                                                    boundingObject USE GRIP_BO
+                                                                    physics Physics {
+                                                                    }
+                                                                  }
+                                                                }
+                                                              ]
+                                                              boundingObject USE WRIST_GROUP
+                                                              physics Physics {
+                                                              }
+                                                            }
+                                                          ]
+                                                          boundingObject USE LINK_5_GM
+                                                          physics Physics {
+                                                          }
+                                                        }
+                                                      }
+                                                    ]
+                                                  }
+                                                ]
+                                                boundingObject USE LINK_4_GM
+                                                physics Physics {
+                                                }
+                                              }
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                      boundingObject USE LINK_3_GM
+                                      physics Physics {
+                                      }
+                                    }
+                                  ]
+                                }
+                              ]
+                              boundingObject USE LINK_2_GM
+                              physics Physics {
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                    name "solid(1)"
+                    boundingObject USE LINK_1_GM
+                    physics Physics {
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+  physics Physics {
+    mass 45
+  }
+  controller "7-dof-controller"
+  battery [
+    0
+  ]
+}
