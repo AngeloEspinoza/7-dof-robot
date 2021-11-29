@@ -9,7 +9,7 @@
 #include <webots/Motor.hpp>
 #include <webots/PositionSensor.hpp>
 #include <webots/Keyboard.hpp>
-// #include <webots/GPS.hpp>
+#include <webots/GPS.hpp>
 
 /* C++ libraries */
 #include <iomanip>
@@ -95,7 +95,7 @@ int main(int argc, char **argv)
   Keyboard keyboard;
 
   /* GPS */
-  // GPS *gps = robot->getGPS("gps");
+  GPS *gps = robot->getGPS("gps");
 
   /* Enabling position sensors */
   ps_link_1->enable(TIME_STEP);
@@ -103,9 +103,11 @@ int main(int argc, char **argv)
   ps_link_3->enable(TIME_STEP);
   ps_link_4->enable(TIME_STEP);
 
+  /* Enabling keyboard  */
+  keyboard.enable(TIME_STEP);
 
   /* Enabling GPS */
-  // gps->enable(TIME_STEP);
+  gps->enable(TIME_STEP);
 
 
 
@@ -122,6 +124,10 @@ int main(int argc, char **argv)
     float theta_2 = ps_link_2->getValue();
     float theta_3 = ps_link_3->getValue();
     float theta_4 = ps_link_4->getValue();
+
+    const double position_x = gps->getValues()[0];
+    const double position_y = gps->getValues()[1];
+    const double position_z = gps->getValues()[2];
 
     /* Translations in z Trans_z(d_i) */
     float d1 = 0.715;  // [m]
@@ -175,7 +181,9 @@ int main(int argc, char **argv)
     std::cout << "Position sensor link 3: " << radians_to_degrees(ps_link_3->getValue()) << std::endl;
     std::cout << "Position sensor link 4: " << radians_to_degrees(ps_link_4->getValue()) << std::endl;
 
-    // std::cout << "GPS: " << gps->getValues() << std::endl;
+    std::cout << "Robot position in x: " << position_x << std::endl;
+    std::cout << "Robot position in y: " << position_y << std::endl;
+    std::cout << "Robot position in z: " << position_z << std::endl;
 
     switch (key)
     {
