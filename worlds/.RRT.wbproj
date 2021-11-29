@@ -5,5 +5,5 @@ sceneTreePerspectives: 000000ff0000000100000002000000c0000000fa01000000020100000
 maximizedDockId: -1
 centralWidgetVisible: 1
 orthographicViewHeight: 1
-textFiles: 1 "../7-DOF Robot/controllers/7-dof-controller/7-dof-controller.cpp" "controllers/RRT/RRT.cpp"
+textFiles: 1 "../7-DOF Robot/controllers/7-dof-controller/7-dof-controller.cpp" "RRT.cpp"
 consoles: Console:All:All
