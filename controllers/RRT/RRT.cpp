@@ -10,9 +10,11 @@
 #include <webots/PositionSensor.hpp>
 #include <webots/Keyboard.hpp>
 #include <webots/GPS.hpp>
+#include <webots/Compass.hpp>
 
 /* C++ libraries */
 #include <iomanip>
+#include <cmath>
 
 /* Own libraries */
 #include <DH.hpp>
@@ -43,6 +45,14 @@ void move_left_robot(Motor *wheel_1, Motor *wheel_2, Motor *wheel_3);
 void move_right_robot(Motor *wheel_1, Motor *wheel_2, Motor *wheel_3);
 void turn_around_robot(Motor *wheel_1, Motor *wheel_2, Motor *wheel_3);
 void stop_robot(Motor *wheel_1, Motor *wheel_2, Motor *wheel_3);
+
+void turn_left_robot(Motor *wheel_1, Motor *wheel_2, Motor *wheel_3);
+void turn_right_robot(Motor *wheel_1, Motor *wheel_2, Motor *wheel_3);
+double get_bearing_in_degrees(Compass *compass);
+
+float calculate_angle_in_degrees(float position_x, float position_z, float destination_x, float destination_z);
+float bearing_to_heading(double heading);
+double cartesian_calculation(double heading, double destination);
 
 int main(int argc, char **argv) 
 {
@@ -97,6 +107,9 @@ int main(int argc, char **argv)
   /* GPS */
   GPS *gps = robot->getGPS("gps");
 
+  /* Compass */
+  Compass *compass = robot->getCompass("compass");
+
   /* Enabling position sensors */
   ps_link_1->enable(TIME_STEP);
   ps_link_2->enable(TIME_STEP);
@@ -109,11 +122,15 @@ int main(int argc, char **argv)
   /* Enabling GPS */
   gps->enable(TIME_STEP);
 
-
+  /* Enabling Compass */
+  compass->enable(TIME_STEP);  
 
   /* Homogenous transformation matrices */
   float **A01, **A12, **A23, **A34; // Matrices
   float **A02, **A03, **A04; // Resultant matrices
+
+  int desired_x = -1;
+  int desired_z = -2;
 
   while (robot->step(TIME_STEP) != -1) 
   {
@@ -125,9 +142,22 @@ int main(int argc, char **argv)
     float theta_3 = ps_link_3->getValue();
     float theta_4 = ps_link_4->getValue();
 
+    /* Robot position coordinates */
     const double position_x = gps->getValues()[0];
     const double position_y = gps->getValues()[1];
     const double position_z = gps->getValues()[2];
+
+    /* Robot compass angles */
+    const double compass_x = compass->getValues()[0];
+    const double compass_y = compass->getValues()[1];
+    const double compass_z = compass->getValues()[2];
+
+    /* Calculates the needed angle beta that the robot needs to rotate 
+       to align it with the desired position */
+    float beta = calculate_angle_in_degrees(position_x, position_z, desired_x, desired_z);
+
+    /* Current heading of the robot */
+    double current_compass = get_bearing_in_degrees(compass); // Recommended by Webots
 
     /* Translations in z Trans_z(d_i) */
     float d1 = 0.715;  // [m]
@@ -175,7 +205,6 @@ int main(int argc, char **argv)
     std::cout << "\t---RESULT (A04)---" << std::endl;
     print_matrix(A04);
 
-
     std::cout << "Position sensor link 1: " << radians_to_degrees(ps_link_1->getValue()) << std::endl;
     std::cout << "Position sensor link 2: " << radians_to_degrees(ps_link_2->getValue()) << std::endl;
     std::cout << "Position sensor link 3: " << radians_to_degrees(ps_link_3->getValue()) << std::endl;
@@ -184,6 +213,10 @@ int main(int argc, char **argv)
     std::cout << "Robot position in x: " << position_x << std::endl;
     std::cout << "Robot position in y: " << position_y << std::endl;
     std::cout << "Robot position in z: " << position_z << std::endl;
+
+    std::cout << "Robot heading in x: " << compass_x << std::endl;
+    std::cout << "Robot heading in y: " << compass_y << std::endl;
+    std::cout << "Robot heading in z: " << compass_z << std::endl;
 
     switch (key)
     {
@@ -207,12 +240,25 @@ int main(int argc, char **argv)
         break;
     }
 
+    std::cout << "Needed angle to reach desired position: " << beta << "°" << std::endl;
+    std::cout << "Current angle to reach desired position: " << current_compass << "°" << std::endl;
 
-    std::cout << key << std::endl;
+    if (current_compass >= 359) // Avoids initial angle 
+    {
+      current_compass = 0;
+    }
+    
+    if (beta > current_compass)
+    {
+      turn_right_robot(motor_wheel_1, motor_wheel_2, motor_wheel_3);
+    }
+    else
+    {
+      stop_robot(motor_wheel_1, motor_wheel_2, motor_wheel_3);
+    }
   };
 
   // Enter here exit cleanup code.
-
   delete robot;
   return 0;
 }
@@ -220,13 +266,12 @@ int main(int argc, char **argv)
 
 float degrees_to_radians(float degrees)
 {
-  return (degrees / 360) * 2*PI;
+  return (degrees / 180) * PI;
 }
 
 float radians_to_degrees(float radians)
 {
-  radians = (radians / PI) * 180;
-  return radians;
+  return (radians / PI) * 180;;
 }
 
 void move_link_1_left(Motor *link_1)
@@ -330,3 +375,97 @@ void print_matrix(float **Tij)
     std::cout << std::endl;
   }
 }
+
+float calculate_angle_in_degrees(float position_x, float position_z, float destination_x, float destination_z)
+{
+  float adjacent_cathetus = destination_x - position_x;
+  float opposite_cathetus = destination_z - position_z;
+
+  float angle = radians_to_degrees(atan2(opposite_cathetus, adjacent_cathetus));
+
+  if (angle >= 360)
+  {
+    return angle = angle - 360;
+  }
+  else if (angle < 0)
+  {
+    return angle += 360;
+  }
+  else
+  {
+    return angle;
+  }
+}
+
+void turn_left_robot(Motor *wheel_1, Motor *wheel_2, Motor *wheel_3)
+{
+  wheel_1->setVelocity(3);
+  wheel_2->setVelocity(-3);
+  wheel_3->setVelocity(-3);
+}
+
+void turn_right_robot(Motor *wheel_1, Motor *wheel_2, Motor *wheel_3)
+{
+  wheel_1->setVelocity(-3);
+  wheel_2->setVelocity(3);
+  wheel_3->setVelocity(3);
+}
+
+double get_bearing_in_degrees(Compass *compass)
+{
+  const double *north = compass->getValues();
+  double rad = atan2(north[0], north[2]);
+  double bearing = radians_to_degrees((rad - 1.5708));
+
+  if (bearing < 0)
+  {
+    bearing = bearing + 360;
+  }
+
+  return bearing;
+}
+
+float bearing_to_heading(double heading)
+{
+  heading = 360 - heading;
+
+  heading = heading + 90;
+
+  if (heading > 360)
+  {
+    heading = heading - 360;
+  }
+
+  return heading;
+}
+
+double cartesian_calculation(double heading, double destination) {
+    double theta_dot = destination - heading;
+
+    if (theta_dot > 180)
+        theta_dot = -(360-theta_dot);
+    else if (theta_dot < -180)
+        theta_dot = (360+theta_dot);
+
+    return theta_dot;
+}
+
+
+
+// TODO: Autonomously rotate the robot until the desired angle is 0 (it is achieved)
+// Create a function to do so.
+// Create function that computes the euclidean distance.
+// Make the robot moves to the desired position.
+
+// TODO: Create obstacles and match them with the python script in size.
+// Read an input file with coordinates separeted (try to put them in array preferably
+// when reading them).
+// e.g.
+// 0 0 
+// 2 3
+// 4 1
+// Write an ouput file in Python with info about the node coordinates, and obstacles
+// coordinates.
+// Rescale the node coordinates and obstacle coordinates since the Python script 
+// is in dimensions of (600, 600) and the webots world is in dimensions of (6, 6)
+// Therefore, try to divide the ouput file info by 100.
