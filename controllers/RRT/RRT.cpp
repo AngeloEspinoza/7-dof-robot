@@ -21,6 +21,10 @@
 
 /* Macros */
 #define PI 3.141592
+#define RADIUS_WHEELS 0.04
+
+#define MAX_VELOCITY 100
+#define ANGULAR_VELOCITY 3 // Wheels angular velocity
 
 using namespace webots;
 
@@ -51,6 +55,9 @@ void turn_right_robot(Motor *wheel_1, Motor *wheel_2, Motor *wheel_3);
 double get_bearing_in_degrees(Compass *compass);
 
 float calculate_angle_in_degrees(float position_x, float position_z, float destination_x, float destination_z);
+float euclidean_distance(float position_x, float position_z, float destination_x, float destination_z);
+float linear_velocity(float meters_per_second);
+
 float bearing_to_heading(double heading);
 double cartesian_calculation(double heading, double destination);
 
@@ -130,7 +137,7 @@ int main(int argc, char **argv)
   float **A02, **A03, **A04; // Resultant matrices
 
   int desired_x = -1;
-  int desired_z = -2;
+  int desired_z = -1;
 
   while (robot->step(TIME_STEP) != -1) 
   {
@@ -158,6 +165,9 @@ int main(int argc, char **argv)
 
     /* Current heading of the robot */
     double current_compass = get_bearing_in_degrees(compass); // Recommended by Webots
+
+    /* Euclidean distance from the robot position to the goal position */
+    float distance_robot_to_goal = euclidean_distance(position_x, position_z, desired_x, desired_z);
 
     /* Translations in z Trans_z(d_i) */
     float d1 = 0.715;  // [m]
@@ -242,13 +252,15 @@ int main(int argc, char **argv)
 
     std::cout << "Needed angle to reach desired position: " << beta << "°" << std::endl;
     std::cout << "Current angle to reach desired position: " << current_compass << "°" << std::endl;
+    std::cout << "Angle error: " << current_compass - beta << "°" << std:: endl;
+    std::cout << "Euclidean distance: " << distance_robot_to_goal << std::endl;
 
     if (current_compass >= 359) // Avoids initial angle 
     {
       current_compass = 0;
     }
     
-    if (beta > current_compass)
+    if (beta > current_compass && distance_robot_to_goal >= 0)
     {
       turn_right_robot(motor_wheel_1, motor_wheel_2, motor_wheel_3);
     }
@@ -256,6 +268,13 @@ int main(int argc, char **argv)
     {
       stop_robot(motor_wheel_1, motor_wheel_2, motor_wheel_3);
     }
+
+    if (current_compass - beta >= 0 && distance_robot_to_goal > 0.05)
+    {
+      move_forward_robot(motor_wheel_1, motor_wheel_2, motor_wheel_3);
+    }
+
+
   };
 
   // Enter here exit cleanup code.
@@ -324,15 +343,15 @@ void stop_links(Motor *link_1, Motor *link_2, Motor *link_3, Motor *link_4)
 
 void move_forward_robot(Motor *wheel_1, Motor *wheel_2, Motor *wheel_3)
 {
-  wheel_1->setVelocity(-3);
-  wheel_2->setVelocity(-3);
+  wheel_1->setVelocity(-ANGULAR_VELOCITY);
+  wheel_2->setVelocity(-ANGULAR_VELOCITY);
   wheel_3->setVelocity(0);
 }
 
 void move_backward_robot(Motor *wheel_1, Motor *wheel_2, Motor *wheel_3)
 {
-  wheel_1->setVelocity(3);
-  wheel_2->setVelocity(3);
+  wheel_1->setVelocity(ANGULAR_VELOCITY);
+  wheel_2->setVelocity(ANGULAR_VELOCITY);
   wheel_3->setVelocity(0);
 }
 
@@ -381,7 +400,7 @@ float calculate_angle_in_degrees(float position_x, float position_z, float desti
   float adjacent_cathetus = destination_x - position_x;
   float opposite_cathetus = destination_z - position_z;
 
-  float angle = radians_to_degrees(atan2(opposite_cathetus, adjacent_cathetus));
+  float angle = radians_to_degrees(atan2(opposite_cathetus, adjacent_cathetus)) - 11; // Possible change
 
   if (angle >= 360)
   {
@@ -439,7 +458,8 @@ float bearing_to_heading(double heading)
   return heading;
 }
 
-double cartesian_calculation(double heading, double destination) {
+double cartesian_calculation(double heading, double destination) 
+{
     double theta_dot = destination - heading;
 
     if (theta_dot > 180)
@@ -450,12 +470,23 @@ double cartesian_calculation(double heading, double destination) {
     return theta_dot;
 }
 
+float euclidean_distance(float position_x, float position_z, float destination_x, float destination_z)
+{
+  return sqrt(pow((destination_x - position_x), 2) + pow((destination_z - position_z), 2));
+}
 
+float linear_velocity(float meters_per_second)
+{
+  float RPM;
+  float linear_velocity;
 
-// TODO: Autonomously rotate the robot until the desired angle is 0 (it is achieved)
-// Create a function to do so.
-// Create function that computes the euclidean distance.
-// Make the robot moves to the desired position.
+  meters_per_second = meters_per_second / RADIUS_WHEELS;
+  RPM = (meters_per_second * 290) / MAX_VELOCITY;
+  linear_velocity = ((2 * PI * RADIUS_WHEELS) / 60) * RPM;
+
+  return linear_velocity;
+}
+
 
 // TODO: Create obstacles and match them with the python script in size.
 // Read an input file with coordinates separeted (try to put them in array preferably
