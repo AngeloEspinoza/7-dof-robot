@@ -136,8 +136,11 @@ int main(int argc, char **argv)
   float **A01, **A12, **A23, **A34; // Matrices
   float **A02, **A03, **A04; // Resultant matrices
 
-  int desired_x = -1;
-  int desired_z = -1;
+  float desired_x = 0;
+  float desired_z = 0;
+
+  int coordinate = 0;
+  float coordinates[][3] = {{2.5, -2.5}, {2.5, 2.5}, {-2.5, 2.5}}; 
 
   while (robot->step(TIME_STEP) != -1) 
   {
@@ -168,6 +171,9 @@ int main(int argc, char **argv)
 
     /* Euclidean distance from the robot position to the goal position */
     float distance_robot_to_goal = euclidean_distance(position_x, position_z, desired_x, desired_z);
+
+    /* Angle error between the ideal angle and the current angle */
+    float angle_error = current_compass - beta;
 
     /* Translations in z Trans_z(d_i) */
     float d1 = 0.715;  // [m]
@@ -252,29 +258,41 @@ int main(int argc, char **argv)
 
     std::cout << "Needed angle to reach desired position: " << beta << "°" << std::endl;
     std::cout << "Current angle to reach desired position: " << current_compass << "°" << std::endl;
-    std::cout << "Angle error: " << current_compass - beta << "°" << std:: endl;
-    std::cout << "Euclidean distance: " << distance_robot_to_goal << std::endl;
+    std::cout << "Angle error: " << angle_error << "°" << std:: endl;
+    std::cout << "Euclidean distance: " << distance_robot_to_goal << "m" << std::endl;
 
     if (current_compass >= 359) // Avoids initial angle 
     {
       current_compass = 0;
     }
     
-    if (beta > current_compass && distance_robot_to_goal >= 0)
+    if ((beta > current_compass && distance_robot_to_goal >= 0 && distance_robot_to_goal >= 0.01))
     {
       turn_right_robot(motor_wheel_1, motor_wheel_2, motor_wheel_3);
+    }
+    else if((beta < current_compass && distance_robot_to_goal >= 0 && distance_robot_to_goal >= 0.01))
+    {
+      turn_left_robot(motor_wheel_1, motor_wheel_2, motor_wheel_3);
     }
     else
     {
       stop_robot(motor_wheel_1, motor_wheel_2, motor_wheel_3);
+
+      if (distance_robot_to_goal < 0.01)
+      {
+        desired_x = coordinates[coordinate][0];
+        desired_z = coordinates[coordinate][1];
+        coordinate++;  
+
+        std::cout << "New desired coordinate in x: " << desired_x << std::endl;
+        std::cout << "New desired coordinate in z: " << desired_z << std::endl;   
+      }
     }
 
-    if (current_compass - beta >= 0 && distance_robot_to_goal > 0.05)
+    if (angle_error >= 0 && angle_error <= 2 && distance_robot_to_goal >= 0.01)
     {
       move_forward_robot(motor_wheel_1, motor_wheel_2, motor_wheel_3);
     }
-
-
   };
 
   // Enter here exit cleanup code.
@@ -400,7 +418,7 @@ float calculate_angle_in_degrees(float position_x, float position_z, float desti
   float adjacent_cathetus = destination_x - position_x;
   float opposite_cathetus = destination_z - position_z;
 
-  float angle = radians_to_degrees(atan2(opposite_cathetus, adjacent_cathetus)) - 11; // Possible change
+  float angle = radians_to_degrees(atan2(opposite_cathetus, adjacent_cathetus)) - 1; // Possible change
 
   if (angle >= 360)
   {
