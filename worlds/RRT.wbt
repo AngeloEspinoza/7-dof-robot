@@ -4,7 +4,9 @@ WorldInfo {
 }
 Viewpoint {
   orientation 1 0 0 4.71238898038469
-  position 0.0001027458335582282 18.039273604833472 4.069114999463862e-07
+  position 0.00010274583355811686 12.406461000705999 4.069115016561589e-07
+  follow "robot"
+  followType "None"
 }
 TexturedBackground {
 }
@@ -272,7 +274,7 @@ Robot {
                   ]
                   endPoint Solid {
                     translation 7.487471054116349e-05 -2.603625145575221e-06 8.505712828676918e-06
-                    rotation 0.0037795445435367544 -0.003629015093207698 0.9999862725520271 6.0746054882000164
+                    rotation 0.003779544543536754 -0.0036290150932076974 0.999986272552027 6.0746054882000164
                     children [
                       DEF WHEEL_TR2 Transform {
                         rotation 1 0 0 1.57
@@ -483,7 +485,7 @@ Robot {
                   ]
                   endPoint Solid {
                     translation -5.08010733144983e-05 0.0004330319098755047 1.170381764481473e-05
-                    rotation -2.3587923327299532e-07 6.091967498161372e-06 -0.9999999999814161 0.18654317754716365
+                    rotation -2.3587923327299535e-07 6.091967498161373e-06 -0.9999999999814162 0.18654317754716365
                     children [
                       DEF WHEEL_TR3 Transform {
                         rotation 1 0 0 1.57
@@ -1175,4 +1177,39 @@ Robot {
   battery [
     0
   ]
+}
+DEF WALL_1 Solid {
+  translation -1 0.25 -0.7
+  children [
+    Shape {
+      appearance DEF WALL_SH PBRAppearance {
+        baseColor 0.729412 0.54902 0.388235
+        roughness 1
+        metalness 0
+      }
+      geometry Box {
+        size 4 0.5 0.3
+      }
+    }
+  ]
+}
+DEF WALL_1 Solid {
+  translation 1 0.25 1.4
+  children [
+    Shape {
+      appearance DEF WALL_SH PBRAppearance {
+        baseColor 0.729412 0.54902 0.388235
+        roughness 1
+        metalness 0
+      }
+      geometry Box {
+        size 4 0.5 0.3
+      }
+    }
+  ]
+  name "solid(1)"
+}
+YoubotFlag {
+  translation 2 0 2.3
+  rotation 0 1 0 0.78
 }
