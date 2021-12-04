@@ -7,4 +7,4 @@ build/release/RRT.o: RRT.cpp \
  /snap/webots/19/usr/share/webots/include/controller/cpp/webots/Keyboard.hpp \
  /snap/webots/19/usr/share/webots/include/controller/cpp/webots/GPS.hpp \
  /snap/webots/19/usr/share/webots/include/controller/cpp/webots/Compass.hpp \
- DH.hpp
+ DH.hpp readfile.hpp

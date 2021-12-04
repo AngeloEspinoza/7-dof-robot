@@ -18,13 +18,14 @@
 
 /* Own libraries */
 #include <DH.hpp>
+#include <readfile.hpp>
 
 /* Macros */
 #define PI 3.141592
 #define RADIUS_WHEELS 0.04
 
 #define MAX_VELOCITY 100
-#define ANGULAR_VELOCITY 3 // Wheels angular velocity
+#define ANGULAR_VELOCITY 5 // Wheels angular velocity
 
 using namespace webots;
 
@@ -136,11 +137,13 @@ int main(int argc, char **argv)
   float **A01, **A12, **A23, **A34; // Matrices
   float **A02, **A03, **A04; // Resultant matrices
 
-  float desired_x = 0;
-  float desired_z = 0;
-
   int coordinate = 0;
-  float coordinates[][3] = {{2.5, -2.5}, {2.5, 2.5}, {-2.5, 2.5}}; 
+  float **coordinates = coordinates_to_follow(); // Exact coordinates to follow
+  int number_of_nodes = nodes_to_follow(); // Number of nodes to follow
+  bool isReached = false;     
+
+
+  // std::cout << "testing: " << coordinates_[1][1] << std::endl;
 
   while (robot->step(TIME_STEP) != -1) 
   {
@@ -164,13 +167,13 @@ int main(int argc, char **argv)
 
     /* Calculates the needed angle beta that the robot needs to rotate 
        to align it with the desired position */
-    float beta = calculate_angle_in_degrees(position_x, position_z, desired_x, desired_z);
+    float beta = calculate_angle_in_degrees(position_x, position_z, coordinates[coordinate][0], coordinates[coordinate][1]);
 
     /* Current heading of the robot */
     double current_compass = get_bearing_in_degrees(compass); // Recommended by Webots
 
     /* Euclidean distance from the robot position to the goal position */
-    float distance_robot_to_goal = euclidean_distance(position_x, position_z, desired_x, desired_z);
+    float distance_robot_to_goal = euclidean_distance(position_x, position_z, coordinates[coordinate][0], coordinates[coordinate][1]);
 
     /* Angle error between the ideal angle and the current angle */
     float angle_error = current_compass - beta;
@@ -260,32 +263,39 @@ int main(int argc, char **argv)
     std::cout << "Current angle to reach desired position: " << current_compass << "°" << std::endl;
     std::cout << "Angle error: " << angle_error << "°" << std:: endl;
     std::cout << "Euclidean distance: " << distance_robot_to_goal << "m" << std::endl;
+    std::cout << "Going towards (" << coordinates[coordinate][0] << ", " << coordinates[coordinate][1] << ")" << std::endl;
+    std::cout << "Visited nodes: " << coordinate << std::endl;
+    std::cout << "Number of nodes: " << number_of_nodes << std::endl;
+
 
     if (current_compass >= 359) // Avoids initial angle 
     {
       current_compass = 0;
     }
     
-    if ((beta > current_compass && distance_robot_to_goal >= 0 && distance_robot_to_goal >= 0.01))
+    if ((beta > current_compass && distance_robot_to_goal >= 0 && distance_robot_to_goal >= 0.05))
     {
       turn_right_robot(motor_wheel_1, motor_wheel_2, motor_wheel_3);
     }
-    else if((beta < current_compass && distance_robot_to_goal >= 0 && distance_robot_to_goal >= 0.01))
+    else if((beta < current_compass && distance_robot_to_goal >= 0 && distance_robot_to_goal >= 0.05))
     {
       turn_left_robot(motor_wheel_1, motor_wheel_2, motor_wheel_3);
     }
     else
     {
       stop_robot(motor_wheel_1, motor_wheel_2, motor_wheel_3);
+      
 
-      if (distance_robot_to_goal < 0.01)
+      if (distance_robot_to_goal < 0.05 && !isReached)
       {
-        desired_x = coordinates[coordinate][0];
-        desired_z = coordinates[coordinate][1];
-        coordinate++;  
+        coordinate++;
+      }
 
-        std::cout << "New desired coordinate in x: " << desired_x << std::endl;
-        std::cout << "New desired coordinate in z: " << desired_z << std::endl;   
+      if (number_of_nodes <= coordinate + 1) // When the array is out of range
+      {
+        std::cout << "GOAL REACHED!" << std::endl;
+        stop_robot(motor_wheel_1, motor_wheel_2, motor_wheel_3);
+        isReached = true;
       }
     }
 
@@ -299,7 +309,6 @@ int main(int argc, char **argv)
   delete robot;
   return 0;
 }
-
 
 float degrees_to_radians(float degrees)
 {
@@ -507,12 +516,6 @@ float linear_velocity(float meters_per_second)
 
 
 // TODO: Create obstacles and match them with the python script in size.
-// Read an input file with coordinates separeted (try to put them in array preferably
-// when reading them).
-// e.g.
-// 0 0 
-// 2 3
-// 4 1
 // Write an ouput file in Python with info about the node coordinates, and obstacles
 // coordinates.
 // Rescale the node coordinates and obstacle coordinates since the Python script 

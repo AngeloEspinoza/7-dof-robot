@@ -65,7 +65,7 @@
 ###
 ###-----------------------------------------------------------------------------
 
-CXX_SOURCES = RRT.cpp DH.cpp 
+CXX_SOURCES = RRT.cpp DH.cpp readfile.cpp 
 
 ### Do not modify: this includes Webots global Makefile.include
 null :=

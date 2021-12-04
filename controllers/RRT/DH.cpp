@@ -14,7 +14,7 @@ float **dh(float theta, float d, float a, float alpha)
 	{
 		T[i] = new float[ROWS];
 		
-		for (int j = 0; j < ROWS; ++j)
+		for (int j = 0; j < COLUMNS; ++j)
 		{
 			T[i][j] = 0;
 		}
@@ -55,7 +55,7 @@ float **multiply_matrices(float **matrix_1, float **matrix_2)
 	{
 		result[i] = new float[ROWS];
 
-		for (int j = 0; j < ROWS; ++j)
+		for (int j = 0; j < COLUMNS; ++j)
 		{
 			result[i][j] = 0;
 		}
