@@ -22,10 +22,9 @@
 
 /* Macros */
 #define PI 3.141592
-#define RADIUS_WHEELS 0.04
+#define RADIUS_WHEELS 0.04 // [m]
 
-#define MAX_VELOCITY 100
-#define ANGULAR_VELOCITY 5 // Wheels angular velocity
+#define ANGULAR_VELOCITY 7 // [rad/s] Wheels angular velocity
 
 using namespace webots;
 
@@ -54,13 +53,8 @@ void stop_robot(Motor *wheel_1, Motor *wheel_2, Motor *wheel_3);
 void turn_left_robot(Motor *wheel_1, Motor *wheel_2, Motor *wheel_3);
 void turn_right_robot(Motor *wheel_1, Motor *wheel_2, Motor *wheel_3);
 double get_bearing_in_degrees(Compass *compass);
-
 float calculate_angle_in_degrees(float position_x, float position_z, float destination_x, float destination_z);
 float euclidean_distance(float position_x, float position_z, float destination_x, float destination_z);
-float linear_velocity(float meters_per_second);
-
-float bearing_to_heading(double heading);
-double cartesian_calculation(double heading, double destination);
 
 int main(int argc, char **argv) 
 {
@@ -224,19 +218,28 @@ int main(int argc, char **argv)
     std::cout << "\t---RESULT (A04)---" << std::endl;
     print_matrix(A04);
 
-    std::cout << "Position sensor link 1: " << radians_to_degrees(ps_link_1->getValue()) << std::endl;
-    std::cout << "Position sensor link 2: " << radians_to_degrees(ps_link_2->getValue()) << std::endl;
-    std::cout << "Position sensor link 3: " << radians_to_degrees(ps_link_3->getValue()) << std::endl;
-    std::cout << "Position sensor link 4: " << radians_to_degrees(ps_link_4->getValue()) << std::endl;
+    std::cout << "----- Links Positions -----" << std::endl;
+    std::cout << "Link 1: " << radians_to_degrees(ps_link_1->getValue()) << std::endl;
+    std::cout << "Link 2: " << radians_to_degrees(ps_link_2->getValue()) << std::endl;
+    std::cout << "Link 3: " << radians_to_degrees(ps_link_3->getValue()) << std::endl;
+    std::cout << "Link 4: " << radians_to_degrees(ps_link_4->getValue()) << std::endl;
 
-    std::cout << "Robot position in x: " << position_x << std::endl;
-    std::cout << "Robot position in y: " << position_y << std::endl;
-    std::cout << "Robot position in z: " << position_z << std::endl;
+    std::cout << "----- Robot Positions -----" << std::endl;
+    std::cout << std::fixed << std::setprecision(2) << 
+    "x: " << position_x << "\ty:" << position_y << "\tz:" << position_z << std::endl;
 
-    std::cout << "Robot heading in x: " << compass_x << std::endl;
-    std::cout << "Robot heading in y: " << compass_y << std::endl;
-    std::cout << "Robot heading in z: " << compass_z << std::endl;
-
+    std::cout << "----- Robot Headings -----" << std::endl;
+    std::cout << std::fixed << std::setprecision(2) << 
+    "x: " << compass_x << "\ty: " << compass_y << "\tz: " << compass_z << std::endl;
+    
+    std::cout << "----- INFO -----" << std::endl;
+    std::cout << "Needed angle to reach desired position: " << beta << "°" << std::endl;
+    std::cout << "Current angle to reach desired position: " << current_compass << "°" << std::endl;
+    std::cout << "Angle error: " << angle_error << "°" << std:: endl;
+    std::cout << "Distance to node: " << distance_robot_to_goal << "m" << std::endl;
+    std::cout << "Going towards node at: (" << coordinates[coordinate][0] << ", " << coordinates[coordinate][1] << ")" << std::endl;
+    std::cout << "Visited nodes: " << coordinate << "/" << number_of_nodes << std::endl;
+    
     switch (key)
     {
       case keyboard.UP: move_forward_robot(motor_wheel_1, motor_wheel_2, motor_wheel_3); break;
@@ -259,16 +262,7 @@ int main(int argc, char **argv)
         break;
     }
 
-    std::cout << "Needed angle to reach desired position: " << beta << "°" << std::endl;
-    std::cout << "Current angle to reach desired position: " << current_compass << "°" << std::endl;
-    std::cout << "Angle error: " << angle_error << "°" << std:: endl;
-    std::cout << "Euclidean distance: " << distance_robot_to_goal << "m" << std::endl;
-    std::cout << "Going towards (" << coordinates[coordinate][0] << ", " << coordinates[coordinate][1] << ")" << std::endl;
-    std::cout << "Visited nodes: " << coordinate << std::endl;
-    std::cout << "Number of nodes: " << number_of_nodes << std::endl;
-
-
-    if (current_compass >= 359) // Avoids initial angle 
+    if (current_compass >= 359) // Avoids initial angle that causes the robot to get stuck
     {
       current_compass = 0;
     }
@@ -299,7 +293,7 @@ int main(int argc, char **argv)
       }
     }
 
-    if (angle_error >= 0 && angle_error <= 2 && distance_robot_to_goal >= 0.01)
+    if (angle_error >= 0 && angle_error <= 2 && distance_robot_to_goal >= 0.05)
     {
       move_forward_robot(motor_wheel_1, motor_wheel_2, motor_wheel_3);
     }
@@ -427,7 +421,7 @@ float calculate_angle_in_degrees(float position_x, float position_z, float desti
   float adjacent_cathetus = destination_x - position_x;
   float opposite_cathetus = destination_z - position_z;
 
-  float angle = radians_to_degrees(atan2(opposite_cathetus, adjacent_cathetus)) - 1; // Possible change
+  float angle = radians_to_degrees(atan2(opposite_cathetus, adjacent_cathetus)) - 2; // Possible change
 
   if (angle >= 360)
   {
@@ -435,7 +429,7 @@ float calculate_angle_in_degrees(float position_x, float position_z, float desti
   }
   else if (angle < 0)
   {
-    return angle += 360;
+    return angle += 359;
   }
   else
   {
@@ -471,53 +465,7 @@ double get_bearing_in_degrees(Compass *compass)
   return bearing;
 }
 
-float bearing_to_heading(double heading)
-{
-  heading = 360 - heading;
-
-  heading = heading + 90;
-
-  if (heading > 360)
-  {
-    heading = heading - 360;
-  }
-
-  return heading;
-}
-
-double cartesian_calculation(double heading, double destination) 
-{
-    double theta_dot = destination - heading;
-
-    if (theta_dot > 180)
-        theta_dot = -(360-theta_dot);
-    else if (theta_dot < -180)
-        theta_dot = (360+theta_dot);
-
-    return theta_dot;
-}
-
 float euclidean_distance(float position_x, float position_z, float destination_x, float destination_z)
 {
   return sqrt(pow((destination_x - position_x), 2) + pow((destination_z - position_z), 2));
 }
-
-float linear_velocity(float meters_per_second)
-{
-  float RPM;
-  float linear_velocity;
-
-  meters_per_second = meters_per_second / RADIUS_WHEELS;
-  RPM = (meters_per_second * 290) / MAX_VELOCITY;
-  linear_velocity = ((2 * PI * RADIUS_WHEELS) / 60) * RPM;
-
-  return linear_velocity;
-}
-
-
-// TODO: Create obstacles and match them with the python script in size.
-// Write an ouput file in Python with info about the node coordinates, and obstacles
-// coordinates.
-// Rescale the node coordinates and obstacle coordinates since the Python script 
-// is in dimensions of (600, 600) and the webots world is in dimensions of (6, 6)
-// Therefore, try to divide the ouput file info by 100.

@@ -8,11 +8,11 @@
 float **dh(float theta, float d, float a, float alpha)
 {	
 	/* Create a 4x4 matrix full of zeros */
-	float **T = new float*[COLUMNS];
+	float **T = new float*[ROWS];
 
 	for (int i = 0; i < ROWS; ++i)
 	{
-		T[i] = new float[ROWS];
+		T[i] = new float[COLUMNS];
 		
 		for (int j = 0; j < COLUMNS; ++j)
 		{
@@ -49,11 +49,11 @@ float **multiply_matrices(float **matrix_1, float **matrix_2)
 	// Only multiplies 4x4 matrices
 
 	/* Create a 4x4 matrix full of zeros */
-	float **result = new float*[COLUMNS];
+	float **result = new float*[ROWS];
 
 	for (int i = 0; i < ROWS; ++i)
 	{
-		result[i] = new float[ROWS];
+		result[i] = new float[COLUMNS];
 
 		for (int j = 0; j < COLUMNS; ++j)
 		{

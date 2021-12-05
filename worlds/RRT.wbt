@@ -4,9 +4,8 @@ WorldInfo {
 }
 Viewpoint {
   orientation 1 0 0 4.71238898038469
-  position 0.00010274583355811686 12.406461000705999 4.069115016561589e-07
+  position 0.00010082733925309419 12.497873857215035 1.45345891652605e-06
   follow "robot"
-  followType "None"
 }
 TexturedBackground {
 }
@@ -47,8 +46,8 @@ Robot {
                     }
                   ]
                   endPoint Solid {
-                    translation -2.1022674952721978e-05 -0.00010036692727753005 -4.741542575070755e-06
-                    rotation -0.002111498507350402 -0.000626011164681217 0.9999975748390967 5.895627792741744
+                    translation -2.1022674952721978e-05 -0.00010036692727753009 -4.741542575070755e-06
+                    rotation -0.0021114985073503825 -0.000626011164681212 0.9999975748390968 5.895627792741744
                     children [
                       DEF WHEELS_TR1 Transform {
                         rotation 1 0 0 1.57
@@ -72,7 +71,7 @@ Robot {
                         }
                         endPoint Solid {
                           translation 0 0.04 0
-                          rotation -7.668291541796778e-09 7.6621880458484e-09 1 1.5699999999999958
+                          rotation -7.668291473077865e-09 7.6621881243843e-09 1 1.5699999999999952
                           children [
                             DEF SMALL_WHEEL_TR1 Transform {
                               children [
@@ -102,7 +101,7 @@ Robot {
                         }
                         endPoint Solid {
                           translation 0.02828 0.02828 0
-                          rotation -3.260068912898466e-09 7.869410879494556e-09 1 0.7852999999999923
+                          rotation -3.2600692574511673e-09 7.869410716285397e-09 1 0.7852999999999906
                           children [
                             USE SMALL_WHEEL_SH
                           ]
@@ -120,7 +119,7 @@ Robot {
                         }
                         endPoint Solid {
                           translation -0.02828 0.02828 0
-                          rotation -7.573326882873564e-09 -1.8281093352638997e-08 -0.9999999999999999 0.7852999999999882
+                          rotation -7.57332610309643e-09 -1.8281092690735185e-08 -0.9999999999999999 0.7852999999999859
                           children [
                             Transform {
                               children [
@@ -184,7 +183,7 @@ Robot {
                         }
                         endPoint Solid {
                           translation -0.02828 -0.02828 0
-                          rotation -3.2600686046144865e-09 7.869410933897641e-09 1 0.7852999999999895
+                          rotation -3.260068568345787e-09 7.86941082509154e-09 1 0.7852999999999882
                           children [
                             Transform {
                               children [
@@ -206,7 +205,7 @@ Robot {
                         }
                         endPoint Solid {
                           translation 0.02828 -0.02828 0
-                          rotation 6.481277304922134e-10 1.5644993368336656e-09 -1 0.7852999999999825
+                          rotation 6.481271592601126e-10 1.5644988562733262e-09 -0.9999999999999999 0.785299999999983
                           children [
                             Transform {
                               children [
@@ -227,7 +226,7 @@ Robot {
                         }
                         endPoint Solid {
                           translation 0 -0.04 0
-                          rotation 6.528313905477181e-10 -6.523101477842022e-10 1 1.569999999999997
+                          rotation 6.528325685862076e-10 -6.523100692483032e-10 1 1.5699999999999958
                           children [
                             Transform {
                               children [
@@ -273,8 +272,8 @@ Robot {
                     }
                   ]
                   endPoint Solid {
-                    translation 7.487471054116349e-05 -2.603625145575221e-06 8.505712828676918e-06
-                    rotation 0.003779544543536754 -0.0036290150932076974 0.999986272552027 6.0746054882000164
+                    translation 7.487471054116356e-05 -2.6036251455752345e-06 8.505712828676925e-06
+                    rotation 0.003779544543536751 -0.0036290150932076965 0.999986272552027 6.074605488200025
                     children [
                       DEF WHEEL_TR2 Transform {
                         rotation 1 0 0 1.57
@@ -288,7 +287,7 @@ Robot {
                         }
                         endPoint Solid {
                           translation 0 0.04 0
-                          rotation 1.236858227791414e-08 -1.2358737469161927e-08 0.9999999999999999 1.5699999999999956
+                          rotation 1.2368582258280167e-08 -1.2358737312090129e-08 0.9999999999999999 1.569999999999995
                           children [
                             DEF SMALL_WHEEL_TR2 Transform {
                               children [
@@ -309,7 +308,7 @@ Robot {
                         }
                         endPoint Solid {
                           translation 0.02828 0.02828 0
-                          rotation -7.950249524708023e-10 1.919092289160865e-09 1 0.78529999999999
+                          rotation -7.9502575038231e-10 1.9190928694601464e-09 1 0.7852999999999877
                           children [
                             Transform {
                               children [
@@ -330,7 +329,7 @@ Robot {
                         }
                         endPoint Solid {
                           translation -0.02828 0.02828 0
-                          rotation -5.9278461200027856e-09 -1.4309099041937466e-08 -0.9999999999999999 0.7852999999999825
+                          rotation -5.9278461562715105e-09 -1.430909933208715e-08 -1 0.785299999999979
                           children [
                             Transform {
                               children [
@@ -395,7 +394,7 @@ Robot {
                         }
                         endPoint Solid {
                           translation -0.02828 -0.02828 0
-                          rotation -7.950256234418408e-10 1.9190918358020528e-09 1 0.7852999999999911
+                          rotation -7.950261493380611e-10 1.9190921803547493e-09 1 0.78529999999999
                           children [
                             Transform {
                               children [
@@ -417,7 +416,7 @@ Robot {
                         }
                         endPoint Solid {
                           translation 0.02828 -0.02828 0
-                          rotation -5.927845213285157e-09 -1.430909780880148e-08 -0.9999999999999999 0.7852999999999836
+                          rotation -5.927844886866824e-09 -1.4309097228502227e-08 -0.9999999999999999 0.7852999999999819
                           children [
                             Transform {
                               children [
@@ -438,7 +437,7 @@ Robot {
                         }
                         endPoint Solid {
                           translation 0 -0.04 0
-                          rotation -3.141435971165996e-16 -3.926794963957495e-17 1 1.5699999999999974
+                          rotation -5.497512949540494e-16 0 1 1.5699999999999974
                           children [
                             Transform {
                               children [
@@ -484,8 +483,8 @@ Robot {
                     }
                   ]
                   endPoint Solid {
-                    translation -5.08010733144983e-05 0.0004330319098755047 1.170381764481473e-05
-                    rotation -2.3587923327299535e-07 6.091967498161373e-06 -0.9999999999814162 0.18654317754716365
+                    translation -5.080107331449836e-05 0.00043303190987550454 1.170381764481472e-05
+                    rotation -2.3587923327299484e-07 6.091967498161333e-06 -0.9999999999814163 0.18654317754715652
                     children [
                       DEF WHEEL_TR3 Transform {
                         rotation 1 0 0 1.57
@@ -499,7 +498,7 @@ Robot {
                         }
                         endPoint Solid {
                           translation 0 0.04 0
-                          rotation -4.113905487415682e-09 4.110630697487541e-09 1 1.5699999999999972
+                          rotation -4.113905644487482e-09 4.110630540415743e-09 1 1.569999999999997
                           children [
                             Transform {
                               children [
@@ -520,7 +519,7 @@ Robot {
                         }
                         endPoint Solid {
                           translation 0.02828 0.02828 0
-                          rotation -2.3566867255779038e-09 5.688756361966799e-09 1 0.7852999999999825
+                          rotation -2.356686544234385e-09 5.688756289429402e-09 1 0.7852999999999801
                           children [
                             Transform {
                               children [
@@ -542,7 +541,7 @@ Robot {
                         }
                         endPoint Solid {
                           translation -0.02828 0.02828 0
-                          rotation -3.4573368828480277e-09 -8.345590847466472e-09 -1 0.7852999999999918
+                          rotation -3.4573368103106117e-09 -8.345590557316816e-09 -0.9999999999999999 0.7852999999999929
                           children [
                             Transform {
                               children [
@@ -585,7 +584,7 @@ Robot {
                         }
                         endPoint Solid {
                           translation 0.04 0 0
-                          rotation 0 1 0 1.5699999984434718
+                          rotation 0 1 0 1.5699999984434723
                           children [
                             Transform {
                               children [
@@ -607,7 +606,7 @@ Robot {
                         }
                         endPoint Solid {
                           translation -0.02828 -0.02828 0
-                          rotation -2.3566886840879245e-09 5.688758066595829e-09 1 0.7852999999999963
+                          rotation -2.3566889742375696e-09 5.688758066595845e-09 1 0.7852999999999947
                           children [
                             Transform {
                               children [
@@ -629,7 +628,7 @@ Robot {
                         }
                         endPoint Solid {
                           translation 0.02828 -0.02828 0
-                          rotation -3.4573355409059464e-09 -8.345588562538059e-09 -1 0.7852999999999923
+                          rotation -3.457335604376193e-09 -8.345588281455632e-09 -1 0.7852999999999882
                           children [
                             Transform {
                               children [
@@ -650,7 +649,7 @@ Robot {
                         }
                         endPoint Solid {
                           translation 0 -0.04 0
-                          rotation 7.853589927914995e-17 0 1 1.5699999999999963
+                          rotation 1.178038489187249e-16 6.871891186925619e-17 1 1.5699999999999958
                           children [
                             Transform {
                               children [
@@ -687,7 +686,7 @@ Robot {
                     axis 0 1 0
                   }
                   endPoint Solid {
-                    translation -5.596120594664078e-18 0.1499999999999991 2.8888949165808538e-34
+                    translation -5.5961205946640796e-18 0.1499999999999991 3.851859888774472e-34
                     children [
                       Shape {
                         appearance DEF BASE_COLOR PBRAppearance {
@@ -761,8 +760,8 @@ Robot {
                     }
                   ]
                   endPoint Solid {
-                    translation 0 0.01599999999999991 0
-                    rotation 9.025025121550531e-17 -3.0284659969404284e-05 0.9999999995414197 4.691192266720667e-06
+                    translation 0 0.01599999999999987 0
+                    rotation 9.026253910977755e-17 -2.931765097506931e-05 0.9999999995702378 4.691192266720667e-06
                     children [
                       Shape {
                         appearance DEF LINKS_COLOR PBRAppearance {
@@ -793,8 +792,8 @@ Robot {
                               }
                             ]
                             endPoint Solid {
-                              translation 3.995787345698733e-06 -1.1068431184228763e-07 0.07500040380508288
-                              rotation 2.0650122498167707e-05 0.0005898122419687798 -0.9999998258475307 0.0006158779212779138
+                              translation 3.995787345698733e-06 -1.1068431184228767e-07 0.07500040380508285
+                              rotation 2.065012250793802e-05 0.000589812242247841 -0.9999998258475306 0.0006158779205568468
                               children [
                                 Shape {
                                   appearance USE LINKS_COLOR
@@ -832,7 +831,7 @@ Robot {
                                                 }
                                               ]
                                               endPoint Solid {
-                                                translation 0.12499999999999974 0 -0.04999999999999971
+                                                translation 0.12499999999999968 0 -0.049999999999999656
                                                 rotation 0 0 1 0
                                                 children [
                                                   Shape {
@@ -857,7 +856,7 @@ Robot {
                                                           }
                                                         ]
                                                         endPoint Solid {
-                                                          translation 0.050000000000000086 1.7338764430295528e-18 -0.04999999999999999
+                                                          translation 0.050000000000000044 1.7313353441877899e-18 -0.04999999999999989
                                                           rotation 0 0 1 0
                                                           children [
                                                             Shape {
@@ -1193,7 +1192,7 @@ DEF WALL_1 Solid {
     }
   ]
 }
-DEF WALL_1 Solid {
+DEF WALL_2 Solid {
   translation 1 0.25 1.4
   children [
     Shape {
