@@ -86,8 +86,19 @@ class Graph:
 
 		return (upperCornerX, upperCornerY)
 
+	def convert_to_pygame_coordinates(self, coordinates):
+		return (coordinates + 3) * 100
+
 	def make_obstacles(self):
-		obs = [pygame.Rect((0 - 30, 215 - 30), (400 + 30 - 0, 240 + 30 - 215)), pygame.Rect((200 - 30, 425 - 30), (400 + 30, 455 + 30 - 425))]
+		# Map 1
+		# obs = [pygame.Rect((0 - 30, 215 - 30), (400 + 50 - 0, 240 + 30 - 215)), pygame.Rect((200 - 30, 425 - 30), (400 + 50, 455 + 30 - 425))]
+		# Map 2
+		obs = [pygame.Rect((self.convert_to_pygame_coordinates(-1) - 40, self.convert_to_pygame_coordinates(-1) - 40), (self.convert_to_pygame_coordinates(1) + 40 - self.convert_to_pygame_coordinates(-1), self.convert_to_pygame_coordinates(1) + 40 - self.convert_to_pygame_coordinates(-1))),
+			   pygame.Rect((self.convert_to_pygame_coordinates(-0.25) - 40, self.convert_to_pygame_coordinates(1) - 40), (self.convert_to_pygame_coordinates(0.25) + 40 - self.convert_to_pygame_coordinates(-0.25), self.convert_to_pygame_coordinates(2) + 40 - self.convert_to_pygame_coordinates(1))),
+			   pygame.Rect((self.convert_to_pygame_coordinates(-0.25) - 40, self.convert_to_pygame_coordinates(-2) - 40), (self.convert_to_pygame_coordinates(0.25) + 40 - self.convert_to_pygame_coordinates(-0.25), self.convert_to_pygame_coordinates(0.25) + 40 - self.convert_to_pygame_coordinates(-2))),
+			   pygame.Rect((self.convert_to_pygame_coordinates(-2) - 40, self.convert_to_pygame_coordinates(-0.25) - 40), (self.convert_to_pygame_coordinates(-1) + 40 - self.convert_to_pygame_coordinates(-2), self.convert_to_pygame_coordinates(0.25) + 40 - self.convert_to_pygame_coordinates(-0.25))),
+			   pygame.Rect((self.convert_to_pygame_coordinates(1) - 40, self.convert_to_pygame_coordinates(-0.25) - 40), (self.convert_to_pygame_coordinates(2) + 40 - self.convert_to_pygame_coordinates(1), self.convert_to_pygame_coordinates(0.25) + 40 - self.convert_to_pygame_coordinates(-0.25))),
+			   ]
 
 		self.obstacles = obs.copy()
 

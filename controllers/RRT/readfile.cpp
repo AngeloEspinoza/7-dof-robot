@@ -44,13 +44,6 @@ float **coordinates_to_follow(void)
 		}
 	}
 
-	// for (int i = 0; i < count_nodes; ++i)
-	// {
-	// 	delete[] coordinates[i];
-	// }
-
-	// delete[] coordinates;
-
 	return coordinates;
 }
 

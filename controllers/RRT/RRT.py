@@ -21,7 +21,6 @@ def main():
 	obstacles = graph.make_obstacles()
 	map.draw_map(obstacles)
 
-
 	while (not graph.path_to_goal()):
 		sleep(0.05)
 		if iteration % 10 == 0:
@@ -45,7 +44,7 @@ def main():
 	map.draw_path(graph.get_path_coordinates())
 	map.add_text(iteration)
 	pygame.display.update()
-	sleep(10)
+	sleep(200)
 	pygame.event.clear()
 	pygame.event.wait(100)
 

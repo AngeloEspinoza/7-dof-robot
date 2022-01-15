@@ -136,9 +136,6 @@ int main(int argc, char **argv)
   int number_of_nodes = nodes_to_follow(); // Number of nodes to follow
   bool isReached = false;     
 
-
-  // std::cout << "testing: " << coordinates_[1][1] << std::endl;
-
   while (robot->step(TIME_STEP) != -1) 
   {
     int key = keyboard.getKey();
@@ -224,11 +221,11 @@ int main(int argc, char **argv)
     std::cout << "Link 3: " << radians_to_degrees(ps_link_3->getValue()) << std::endl;
     std::cout << "Link 4: " << radians_to_degrees(ps_link_4->getValue()) << std::endl;
 
-    std::cout << "----- Robot Positions -----" << std::endl;
+    std::cout << "----- Robot Position -----" << std::endl;
     std::cout << std::fixed << std::setprecision(2) << 
     "x: " << position_x << "\ty:" << position_y << "\tz:" << position_z << std::endl;
 
-    std::cout << "----- Robot Headings -----" << std::endl;
+    std::cout << "----- Robot Heading -----" << std::endl;
     std::cout << std::fixed << std::setprecision(2) << 
     "x: " << compass_x << "\ty: " << compass_y << "\tz: " << compass_z << std::endl;
     
@@ -238,7 +235,7 @@ int main(int argc, char **argv)
     std::cout << "Angle error: " << angle_error << "°" << std:: endl;
     std::cout << "Distance to node: " << distance_robot_to_goal << "m" << std::endl;
     std::cout << "Going towards node at: (" << coordinates[coordinate][0] << ", " << coordinates[coordinate][1] << ")" << std::endl;
-    std::cout << "Visited nodes: " << coordinate << "/" << number_of_nodes << std::endl;
+    std::cout << "Visited nodes: " << coordinate << "/" << number_of_nodes - 1<< std::endl;
     
     switch (key)
     {
